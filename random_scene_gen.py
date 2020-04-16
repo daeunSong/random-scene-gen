@@ -83,12 +83,12 @@ def scene_gen ():
         stairs, p = stairs_gen (p, 0.4, 0.15, gap)
         plane, p = plane_gen(p, w_plane, h_plane, gap)
         scene += stairs + plane
-    # generate bridge for 0.3 chance
-    if uniform(0,1) < 0.3:
-        p[0] -= h_plane*2 #+ 1.0
-        p[1] -= w_plane*2
-        bridge, p = bridge_inv_gen(p, w_plane, h_plane, gap)
-        scene += bridge
+        # generate bridge for 0.3 chance
+        if uniform(0,1) < 0.3:
+            p[0] -= h_plane*2 #+ 1.0
+            p[1] -= w_plane*2
+            bridge, p = bridge_inv_gen(p, w_plane, h_plane, gap)
+            scene += bridge
         
     return scene
 
@@ -292,6 +292,6 @@ if __name__ == '__main__':
     ax = draw_scene(all_surfaces)
     plt.show()
     fileName = sys.argv[1]
-    save_obj(fileName+".obj", all_surfaces)
-    save_pb(fileName, all_surfaces)
+    save_obj("obj/"+fileName+".obj", all_surfaces)
+    save_pb("pb/"+fileName, all_surfaces)
 
