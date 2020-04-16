@@ -52,7 +52,7 @@ vf = ViewerFactory (ps)
 from hpp.corbaserver.affordance.affordance import AffordanceTool
 afftool = AffordanceTool ()
 afftool.setAffordanceConfig('Support', [0.5, 0.03, 0.00005])
-afftool.loadObstacleModel (packageName, "multicontact/daeun/"+pbName, "planning", vf)#,reduceSizes=[0.07,0.,0.])
+afftool.loadObstacleModel (packageName, "multicontact/daeun/"+pbName, "planning", vf) ### CHANGE THE PATH HERE
 v = vf.createViewer(displayArrows = True)
 afftool.visualiseAffordances('Support', v, [0.25, 0.5, 0.5])
 v.addLandmark(v.sceneName,1)
