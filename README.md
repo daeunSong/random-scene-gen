@@ -1,4 +1,4 @@
-# random-scenegen
+# random-scene-gen
 A random scene composed of big planes, rubbles, stairs and bridges are generated into a mesh file. The surface normal is recalculated using blender. The start/goal position, min/max bounds for guide path planing are saved into a pickle file. You will need it for the guide path planning. This is all done in one script. 
 
 ### dependencies
