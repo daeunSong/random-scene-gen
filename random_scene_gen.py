@@ -393,6 +393,7 @@ class Grid_terrain:
 
     def init_start_tile(self, indices_tile=[0,0], is_obstacle=False):
         p = (np.array(self.p_start)+np.array([self.tile_size[0]*indices_tile[0],self.tile_size[1]*indices_tile[1],0.])).tolist()
+        is_obstacle = False
         if is_obstacle:
             tile = tile_obstacle_gen(p=p, indices_tile=indices_tile, tile_size=self.tile_size, distance_axis_to_obstacle=[0.3,0.5])
         else:
@@ -567,18 +568,18 @@ class Grid_terrain:
         tile = None
         p = self.get_pos_2D(indices_tile)
         p.append(entry.height)
-        if randint(0, 1)==0 or self.force_init_tile:
-            # Flat
-            print("Create flat ground in ",indices_tile)
-            tile = tile_flat_gen(p, indices_tile, tile_size=self.tile_size)
-        else:
-            # Obstacle
-            print("Create obstacle tile in ",indices_tile)
-            entry_position = entry.positioning_previous_tile
-            list = [BOTTOM, TOP, LEFT, RIGHT]
-            list.remove(entry_position)
-            positioning_obstacle = list[ randint(0,2) ]
-            tile = tile_obstacle_gen(p, indices_tile, tile_size=self.tile_size, positioning_obstacle=positioning_obstacle, distance_axis_to_obstacle=[0.3,0.5])
+        # if randint(0, 1)==0 or self.force_init_tile:
+        # Flat
+        print("Create flat ground in ",indices_tile)
+        tile = tile_flat_gen(p, indices_tile, tile_size=self.tile_size)
+        # else:
+        #     # Obstacle
+        #     print("Create obstacle tile in ",indices_tile)
+        #     entry_position = entry.positioning_previous_tile
+        #     list = [BOTTOM, TOP, LEFT, RIGHT]
+        #     list.remove(entry_position)
+        #     positioning_obstacle = list[ randint(0,2) ]
+        #     tile = tile_obstacle_gen(p, indices_tile, tile_size=self.tile_size, positioning_obstacle=positioning_obstacle, distance_axis_to_obstacle=[0.3,0.5])
         return tile
 
     # Get Stairs, Rubbles or Bridge
@@ -1073,7 +1074,7 @@ if __name__ == '__main__':
 """
 
 if __name__ == '__main__':
-    grid_terrain = Grid_terrain(divison_grid=[5,5]) # Pick a size for your grid, here it's 5x5
+    grid_terrain = Grid_terrain(divison_grid=[10,10]) # Pick a size for your grid, here it's 5x5
     grid_terrain.init_start_tile([1,1]) # Choose where to put the first flat tile from where to start
     grid_terrain.force_init_tile = False # Fill the terrain with only flat tile
     grid_terrain.fill_grid_random(fill_none_randomly=True) # Fill all the grid. If some tiles are none at the end, if fill_none_randomly is True, we fille them.
@@ -1086,6 +1087,7 @@ if __name__ == '__main__':
         #surfaces = grid_terrain.get_all_surfaces()
         file_name = sys.argv[1]
         #input("...")
-        save_links("links/"+file_name+"_links.py", grid_terrain)
+        save_links("links/"+file_name+"_links", grid_terrain)
         save_obj("obj/"+file_name+".obj", grid_terrain.get_all_surfaces())
+        save_pb("pb/"+fileName, all_surfaces)
     
