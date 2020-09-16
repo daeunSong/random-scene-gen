@@ -1084,10 +1084,10 @@ if __name__ == '__main__':
     grid_terrain.plot_surfaces() # plot surfaces
     # Save or not the terrain and links
     if True:
-        #surfaces = grid_terrain.get_all_surfaces()
+        surfaces = grid_terrain.get_all_surfaces()
         file_name = sys.argv[1]
         #input("...")
         save_links("links/"+file_name+"_links", grid_terrain)
         save_obj("obj/"+file_name+".obj", grid_terrain.get_all_surfaces())
-        save_pb("pb/"+fileName, all_surfaces)
+        save_pb("pb/"+file_name, surfaces)
     
