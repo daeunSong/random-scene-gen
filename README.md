@@ -1,5 +1,7 @@
 # random-scene-gen
-Virtual scenes used for legged robot locomotion are randomly generated. Generated scenes are composed of big planes, rubbles, stairs and bridges. A mesh file of the scene is generated. The surface normal is recalculated using blender. The start/goal position, min/max bounds for guide path planing are saved into a pickle file. You will need it for [hpp](https://github.com/humanoid-path-planner), Humanoid Path Planner. This is all done in one script. 
+<img src="./demo/random_scene.png" width="600">
+
+Virtual scenes used for legged robot locomotion are randomly generated. Generated scenes are composed of big **planes**, **rubbles**, **stairs** and **bridges**. A mesh file of the scene is generated. The surface normal is recalculated using blender. The start/goal position, min/max bounds for guide path planing are saved into a pickle file. You will need it for [hpp](https://github.com/humanoid-path-planner), Humanoid Path Planner. This is all done in one script. 
 
 ## Dependencies
 - pickle
