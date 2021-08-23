@@ -22,11 +22,11 @@ def plane_gen (p, w, h, gap):
     return surfaces, p
 
 ### normal rectangle generation 
-def rectangle_gen (p, w, h):  
-    p1 = (np.array(p) + np.array([-h, w, 0.])).tolist()
-    p2 = (np.array(p) + np.array([h, w, 0.])).tolist()
-    p3 = (np.array(p) + np.array([h, -w, 0.])).tolist()
-    p4 = (np.array(p) + np.array([-h, -w, 0.])).tolist()
+def rectangle_gen (p, w, h, gap = 0.01):
+    p1 = (np.array(p) + np.array([-(h-gap), w-gap, 0.])).tolist()
+    p2 = (np.array(p) + np.array([h-gap, w-gap, 0.])).tolist()
+    p3 = (np.array(p) + np.array([h-gap, -(w-gap), 0.])).tolist()
+    p4 = (np.array(p) + np.array([-(h-gap), -(w-gap), 0.])).tolist()
     return [p1, p2, p3, p4]   
 
 ### rectangle generation with some transformations V2
@@ -568,18 +568,18 @@ class Grid_terrain:
         tile = None
         p = self.get_pos_2D(indices_tile)
         p.append(entry.height)
-        # if randint(0, 1)==0 or self.force_init_tile:
-        # Flat
-        print("Create flat ground in ",indices_tile)
-        tile = tile_flat_gen(p, indices_tile, tile_size=self.tile_size)
-        # else:
-        #     # Obstacle
-        #     print("Create obstacle tile in ",indices_tile)
-        #     entry_position = entry.positioning_previous_tile
-        #     list = [BOTTOM, TOP, LEFT, RIGHT]
-        #     list.remove(entry_position)
-        #     positioning_obstacle = list[ randint(0,2) ]
-        #     tile = tile_obstacle_gen(p, indices_tile, tile_size=self.tile_size, positioning_obstacle=positioning_obstacle, distance_axis_to_obstacle=[0.3,0.5])
+        if randint(0, 1)==0 or self.force_init_tile:
+            # Flat
+            print("Create flat ground in ",indices_tile)
+            tile = tile_flat_gen(p, indices_tile, tile_size=self.tile_size)
+        else:
+            # Obstacle
+            print("Create obstacle tile in ",indices_tile)
+            entry_position = entry.positioning_previous_tile
+            list = [BOTTOM, TOP, LEFT, RIGHT]
+            list.remove(entry_position)
+            positioning_obstacle = list[ randint(0,2) ]
+            tile = tile_obstacle_gen(p, indices_tile, tile_size=self.tile_size, positioning_obstacle=positioning_obstacle, distance_axis_to_obstacle=[0.3,0.5])
         return tile
 
     # Get Stairs, Rubbles or Bridge
